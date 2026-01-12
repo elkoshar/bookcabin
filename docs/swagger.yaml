@@ -1,0 +1,12 @@
+basePath: /bookcabin
+info:
+  contact:
+    email: elko.s.eppasa@mail.com
+    name: Elko Sharhadi Eppasa
+    url: https://github.com/elkoshar
+  description: This service is to handle Flight Search and Aggregation API. For more
+    detail, please visit https://github.com/elkoshar/bookcabin
+  title: Flight Search and Aggregation API
+  version: "0.1"
+paths: {}
+swagger: "2.0"
