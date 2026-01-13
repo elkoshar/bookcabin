@@ -10,3 +10,7 @@ type FlightProvider interface {
 	Name() string
 	Search(ctx context.Context, criteria service.SearchCriteria) ([]service.UnifiedFlight, error)
 }
+
+type FlightAggregator interface {
+	Search(ctx context.Context, criteria service.SearchCriteria) (service.SearchResponse, error)
+}

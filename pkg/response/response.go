@@ -71,3 +71,26 @@ func (res *Response) RenderStatusCode() {
 	}
 	res.CodeRender = statusText
 }
+
+func (res *Response) SetError(err error, code ...int) {
+
+	cerr, ok := err.(*Error)
+	if ok {
+		code = []int{cerr.Code}
+	}
+
+	if len(code) > 0 {
+		res.Code = code[0]
+	} else {
+		res.Code = http.StatusInternalServerError
+	}
+
+	if err != nil {
+		res.Error = Error{
+			Msg:    err.Error(),
+			Status: true,
+			Code:   res.Code,
+		}
+	}
+
+}

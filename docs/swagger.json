@@ -13,7 +13,7 @@
     "basePath": "/bookcabin",
     "paths": {
         "/flight/search": {
-            "get": {
+            "post": {
                 "description": "SearchFlight handles request for searching flights",
                 "consumes": [
                     "application/json"
@@ -35,14 +35,221 @@
                         "required": true
                     },
                     {
-                        "type": "string",
-                        "description": "id of Book",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
+                        "description": "Request Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/service.SearchCriteria"
+                        }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Success Response",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/github_com_elkoshar_bookcabin_pkg_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/service.SearchResponse"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "github_com_elkoshar_bookcabin_pkg_response.Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "msg": {
+                    "type": "string",
+                    "example": " "
+                },
+                "status": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "github_com_elkoshar_bookcabin_pkg_response.Response": {
+            "type": "object",
+            "properties": {
+                "code": {},
+                "data": {},
+                "error": {
+                    "$ref": "#/definitions/github_com_elkoshar_bookcabin_pkg_response.Error"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "serverTime": {
+                    "type": "integer"
+                }
+            }
+        },
+        "service.AirlineInfo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "service.DurationInfo": {
+            "type": "object",
+            "properties": {
+                "formatted": {
+                    "type": "string"
+                },
+                "total_minutes": {
+                    "type": "integer"
+                }
+            }
+        },
+        "service.LocationInfo": {
+            "type": "object",
+            "properties": {
+                "airport": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                }
+            }
+        },
+        "service.Metadata": {
+            "type": "object",
+            "properties": {
+                "providers_failed": {
+                    "type": "integer"
+                },
+                "providers_queried": {
+                    "type": "integer"
+                },
+                "providers_succeeded": {
+                    "type": "integer"
+                },
+                "search_time_ms": {
+                    "type": "integer"
+                },
+                "total_results": {
+                    "type": "integer"
+                }
+            }
+        },
+        "service.PriceInfo": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number"
+                },
+                "currency": {
+                    "type": "string"
+                }
+            }
+        },
+        "service.SearchCriteria": {
+            "type": "object",
+            "properties": {
+                "cabinClass": {
+                    "type": "string"
+                },
+                "departureDate": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                },
+                "passengers": {
+                    "type": "integer"
+                }
+            }
+        },
+        "service.SearchResponse": {
+            "type": "object",
+            "properties": {
+                "flights": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/service.UnifiedFlight"
+                    }
+                },
+                "metadata": {
+                    "$ref": "#/definitions/service.Metadata"
+                },
+                "search_criteria": {
+                    "$ref": "#/definitions/service.SearchCriteria"
+                }
+            }
+        },
+        "service.UnifiedFlight": {
+            "type": "object",
+            "properties": {
+                "airline": {
+                    "$ref": "#/definitions/service.AirlineInfo"
+                },
+                "amenities": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "arrival": {
+                    "$ref": "#/definitions/service.LocationInfo"
+                },
+                "available_seats": {
+                    "type": "integer"
+                },
+                "cabin_class": {
+                    "type": "string"
+                },
+                "departure": {
+                    "$ref": "#/definitions/service.LocationInfo"
+                },
+                "duration": {
+                    "$ref": "#/definitions/service.DurationInfo"
+                },
+                "flight_number": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "price": {
+                    "$ref": "#/definitions/service.PriceInfo"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "stops": {
+                    "type": "integer"
+                }
             }
         }
     }

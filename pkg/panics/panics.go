@@ -2,7 +2,6 @@ package panics
 
 import (
 	"bytes"
-	"context"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -15,7 +14,6 @@ import (
 
 	"github.com/eapache/go-resiliency/breaker"
 	"github.com/julienschmidt/httprouter"
-	"google.golang.org/grpc"
 )
 
 var (
@@ -161,21 +159,6 @@ func HTTPRecoveryMiddleware(next http.Handler) http.Handler {
 	}
 
 	return http.HandlerFunc(fn)
-}
-
-// UnaryServerInterceptor intercept the execution of a unary RPC on the server when panic happen
-func UnaryServerInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
-	defer func() {
-		if !recoveryBreak() {
-			rcv := panicRecover(recover())
-			if rcv != nil {
-				fmt.Fprintf(os.Stderr, "Panic: %+v\n", rcv)
-				debug.PrintStack()
-				publishError(rcv, nil, true)
-			}
-		}
-	}()
-	return handler(ctx, req)
 }
 
 func panicRecover(rc interface{}) error {

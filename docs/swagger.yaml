@@ -1,4 +1,126 @@
 basePath: /bookcabin
+definitions:
+  github_com_elkoshar_bookcabin_pkg_response.Error:
+    properties:
+      code:
+        example: 0
+        type: integer
+      msg:
+        example: ' '
+        type: string
+      status:
+        example: false
+        type: boolean
+    type: object
+  github_com_elkoshar_bookcabin_pkg_response.Response:
+    properties:
+      code: {}
+      data: {}
+      error:
+        $ref: '#/definitions/github_com_elkoshar_bookcabin_pkg_response.Error'
+      message:
+        type: string
+      serverTime:
+        type: integer
+    type: object
+  service.AirlineInfo:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  service.DurationInfo:
+    properties:
+      formatted:
+        type: string
+      total_minutes:
+        type: integer
+    type: object
+  service.LocationInfo:
+    properties:
+      airport:
+        type: string
+      city:
+        type: string
+      datetime:
+        type: string
+      timestamp:
+        type: integer
+    type: object
+  service.Metadata:
+    properties:
+      providers_failed:
+        type: integer
+      providers_queried:
+        type: integer
+      providers_succeeded:
+        type: integer
+      search_time_ms:
+        type: integer
+      total_results:
+        type: integer
+    type: object
+  service.PriceInfo:
+    properties:
+      amount:
+        type: number
+      currency:
+        type: string
+    type: object
+  service.SearchCriteria:
+    properties:
+      cabinClass:
+        type: string
+      departureDate:
+        type: string
+      destination:
+        type: string
+      origin:
+        type: string
+      passengers:
+        type: integer
+    type: object
+  service.SearchResponse:
+    properties:
+      flights:
+        items:
+          $ref: '#/definitions/service.UnifiedFlight'
+        type: array
+      metadata:
+        $ref: '#/definitions/service.Metadata'
+      search_criteria:
+        $ref: '#/definitions/service.SearchCriteria'
+    type: object
+  service.UnifiedFlight:
+    properties:
+      airline:
+        $ref: '#/definitions/service.AirlineInfo'
+      amenities:
+        items:
+          type: string
+        type: array
+      arrival:
+        $ref: '#/definitions/service.LocationInfo'
+      available_seats:
+        type: integer
+      cabin_class:
+        type: string
+      departure:
+        $ref: '#/definitions/service.LocationInfo'
+      duration:
+        $ref: '#/definitions/service.DurationInfo'
+      flight_number:
+        type: string
+      id:
+        type: string
+      price:
+        $ref: '#/definitions/service.PriceInfo'
+      provider:
+        type: string
+      stops:
+        type: integer
+    type: object
 info:
   contact:
     email: elko.s.eppasa@mail.com
@@ -10,7 +132,7 @@ info:
   version: "0.1"
 paths:
   /flight/search:
-    get:
+    post:
       consumes:
       - application/json
       description: SearchFlight handles request for searching flights
@@ -21,14 +143,24 @@ paths:
         name: Accept-Language
         required: true
         type: string
-      - description: id of Book
-        in: path
-        name: id
+      - description: Request Body
+        in: body
+        name: body
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/service.SearchCriteria'
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: Success Response
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_elkoshar_bookcabin_pkg_response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/service.SearchResponse'
+              type: object
       summary: Search Flight
       tags:
       - Flight

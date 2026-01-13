@@ -23,5 +23,7 @@ type (
 		LionPath    string `mapstructure:"LION_PATH"`
 		AirAsiaPath string `mapstructure:"AIRASIA_PATH"`
 		BatikPath   string `mapstructure:"BATIK_PATH"`
+
+		AggregatorTimeout time.Duration `mapstructure:"AGGREGATOR_TIMEOUT"`
 	}
 )

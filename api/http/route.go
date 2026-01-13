@@ -12,6 +12,7 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 
 	"github.com/elkoshar/bookcabin/api"
+	"github.com/elkoshar/bookcabin/api/http/aggregator"
 	config "github.com/elkoshar/bookcabin/configs"
 	"github.com/elkoshar/bookcabin/pkg/helpers"
 	"github.com/elkoshar/bookcabin/pkg/logger"
@@ -38,7 +39,6 @@ func handler(checker api.HealthChecker, cfg *config.Config) http.Handler {
 	r.Use(panics.HTTPRecoveryMiddleware)
 	r.Use(middleware.Timeout(cfg.HttpInboundTimeout))
 
-	//skip middleware group
 	r.Get("/application/health", checker.HealthChi)
 	r.Get("/", root)
 	r.Handle("/metrics", promhttp.Handler())
@@ -63,13 +63,16 @@ func handler(checker api.HealthChecker, cfg *config.Config) http.Handler {
 		})
 		r.Use(cors.Handler)
 
-		// Test Panics to Slack function
 		r.Handle("/panics", panics.CaptureHandler(func(w http.ResponseWriter, r *http.Request) {
 			panic("Panics from /test/panics endpoint")
 		}))
 
 		r.With(api.InterceptorRequest()).Route("/bookcabin", func(r chi.Router) {
 			r.Use(api.NewMetricMiddleware())
+
+			r.Route("/flight/search", func(r chi.Router) {
+				r.Post("/", aggregator.Search)
+			})
 
 		})
 	})

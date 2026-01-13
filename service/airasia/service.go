@@ -21,6 +21,8 @@ func New(path string) *Provider {
 func (p *Provider) Name() string { return "AirAsia" }
 
 func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entity.UnifiedFlight, error) {
+	fmt.Printf("❌ p.dataPath %s \n", p.dataPath)
+
 	content, err := os.ReadFile(p.dataPath)
 	if err != nil {
 		return nil, err

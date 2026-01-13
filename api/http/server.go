@@ -4,30 +4,31 @@ import (
 	"context"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/elkoshar/bookcabin/api"
+	"github.com/elkoshar/bookcabin/api/http/aggregator"
 	config "github.com/elkoshar/bookcabin/configs"
 )
 
-// Server struct
 type Server struct {
-	server *http.Server
-	Cfg    *config.Config
-}
-
-func NewServer(cfg *config.Config) *Server {
-	return &Server{
-		server: &http.Server{
-			Handler: handler(api.HealthChecker{}, cfg),
-		},
-		Cfg: cfg,
-	}
+	server      *http.Server
+	Cfg         *config.Config
+	HealthCheck api.HealthChecker
+	Aggregator  api.FlightAggregator
 }
 
 var ()
 
-// Serve will run an HTTP server
 func (s *Server) Serve(port string) error {
+
+	aggregator.Init(s.Aggregator)
+
+	s.server = &http.Server{
+		ReadTimeout:  s.Cfg.HttpReadTimeout * time.Second,
+		WriteTimeout: s.Cfg.HttpWriteTimeout * time.Second,
+		Handler:      handler(s.HealthCheck, s.Cfg),
+	}
 
 	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
@@ -37,7 +38,6 @@ func (s *Server) Serve(port string) error {
 	return s.server.Serve(lis)
 }
 
-// Shutdown will tear down the server
 func (s *Server) Shutdown(ctx context.Context) error {
 	return s.server.Shutdown(ctx)
 }

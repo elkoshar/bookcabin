@@ -1,8 +1,9 @@
 package config
 
 import (
-	"strings"
+	"log/slog"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
 
@@ -29,11 +30,16 @@ func Init(opts ...Option) error {
 		optFunc(opt)
 	}
 
+	envPath := opt.configFolder + ".env"
+
+	if err := godotenv.Load(envPath); err != nil {
+		slog.Warn("Warning: .env file not found, relying on system env vars")
+	}
+
 	viper.AddConfigPath(opt.configFolder)
 	viper.SetConfigName(opt.configFile)
 	viper.SetConfigType(opt.configType)
 
-	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.AutomaticEnv()
 
 	setDefault()
@@ -49,7 +55,7 @@ func Init(opts ...Option) error {
 		return err
 	}
 
-	return nil
+	return cfg.postprocess()
 }
 
 func WithConfigFolder(path string) Option {
@@ -78,9 +84,13 @@ func setDefault() {
 	viper.SetDefault("ENV", "development")
 	viper.SetDefault("GLOBAL_TIMEOUT", 5)
 
-	// Default paths (relative to root)
-	viper.SetDefault("PROVIDERS.GARUDA_PATH", "mock_data/garuda.json")
-	viper.SetDefault("PROVIDERS.LION_PATH", "mock_data/lion.json")
-	viper.SetDefault("PROVIDERS.AIRASIA_PATH", "mock_data/airasia.json")
-	viper.SetDefault("PROVIDERS.BATIK_PATH", "mock_data/batik.json")
+	viper.SetDefault("GARUDA_PATH", "")
+	viper.SetDefault("LION_PATH", "")
+	viper.SetDefault("AIRASIA_PATH", "")
+	viper.SetDefault("BATIK_PATH", "")
+	viper.SetDefault("AGGREGATOR_TIMEOUT", 5)
+}
+
+func (c *Config) postprocess() error {
+	return nil
 }

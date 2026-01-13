@@ -1,17 +1,27 @@
 package aggregator
 
 import (
+	"fmt"
+	"log/slog"
 	"net/http"
 
+	"github.com/elkoshar/bookcabin/api"
+	"github.com/elkoshar/bookcabin/pkg/helpers"
 	"github.com/elkoshar/bookcabin/pkg/response"
-	"github.com/elkoshar/bookcabin/service/aggregator"
+	"github.com/elkoshar/bookcabin/service"
+)
+
+const (
+	ErrParseUrlParamMsg = "Parse Url Param Failed. %v"
+	ErrCreateDataMsg    = "Create Data Failed. %+v"
+	ErrParseValidateMsg = "Failed to Parse and Validate. err=%v"
 )
 
 var (
-	flightAggregator aggregator.FlightAggregator
+	flightAggregator api.FlightAggregator
 )
 
-func Init(service aggregator.FlightAggregator) {
+func Init(service api.FlightAggregator) {
 	flightAggregator = service
 }
 
@@ -22,9 +32,35 @@ func Init(service aggregator.FlightAggregator) {
 // @Accept json
 // @Produce json
 // @Param Accept-Language header string true "accept language" default(id)
+// @Param body body service.SearchCriteria true "Request Body"
+// @Success 200 {object} response.Response{data=service.SearchResponse} "Success Response"
 // @Router /flight/search [POST]
-func SearchFlight(w http.ResponseWriter, r *http.Request) {
+func Search(w http.ResponseWriter, r *http.Request) {
+
 	resp := response.Response{}
 	defer resp.Render(w, r)
+
+	var (
+		err    error
+		req    service.SearchCriteria
+		result service.SearchResponse
+	)
+
+	err = helpers.ParseBodyAndValidate(r, &req)
+	if err != nil {
+		slog.WarnContext(r.Context(), fmt.Sprintf(ErrParseValidateMsg, err))
+		resp.SetError(err, http.StatusBadRequest)
+		return
+	}
+
+	result, err = flightAggregator.Search(r.Context(), req)
+	if err != nil {
+		slog.WarnContext(r.Context(), fmt.Sprintf(ErrCreateDataMsg, err))
+		resp.SetError(err, http.StatusInternalServerError)
+		return
+	}
+
+	resp.Data = result
+	resp.Code = http.StatusCreated
 
 }
