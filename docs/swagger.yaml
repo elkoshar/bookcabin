@@ -8,5 +8,28 @@ info:
     detail, please visit https://github.com/elkoshar/bookcabin
   title: Flight Search and Aggregation API
   version: "0.1"
-paths: {}
+paths:
+  /flight/search:
+    get:
+      consumes:
+      - application/json
+      description: SearchFlight handles request for searching flights
+      parameters:
+      - default: id
+        description: accept language
+        in: header
+        name: Accept-Language
+        required: true
+        type: string
+      - description: id of Book
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Search Flight
+      tags:
+      - Flight
 swagger: "2.0"

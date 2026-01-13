@@ -11,5 +11,39 @@
         "version": "0.1"
     },
     "basePath": "/bookcabin",
-    "paths": {}
+    "paths": {
+        "/flight/search": {
+            "get": {
+                "description": "SearchFlight handles request for searching flights",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Search Flight",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "id",
+                        "description": "accept language",
+                        "name": "Accept-Language",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "id of Book",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    }
 }
