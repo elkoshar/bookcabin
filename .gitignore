@@ -28,3 +28,5 @@ vendor/
 .vs
 .vscode/
 __debug_bin
+
+docker.log
