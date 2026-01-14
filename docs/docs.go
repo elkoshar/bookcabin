@@ -216,6 +216,12 @@ const docTemplate = `{
                 "metadata": {
                     "$ref": "#/definitions/service.Metadata"
                 },
+                "return_flights": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/service.UnifiedFlight"
+                    }
+                },
                 "search_criteria": {
                     "$ref": "#/definitions/service.SearchCriteria"
                 }

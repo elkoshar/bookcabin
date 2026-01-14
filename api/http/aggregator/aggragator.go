@@ -53,7 +53,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err = flightAggregator.Search(r.Context(), req)
+	result, err = flightAggregator.SearchAll(r.Context(), req)
 	if err != nil {
 		slog.WarnContext(r.Context(), fmt.Sprintf(ErrCreateDataMsg, err))
 		resp.SetError(err, http.StatusInternalServerError)

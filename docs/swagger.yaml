@@ -93,6 +93,10 @@ definitions:
         type: array
       metadata:
         $ref: '#/definitions/service.Metadata'
+      return_flights:
+        items:
+          $ref: '#/definitions/service.UnifiedFlight'
+        type: array
       search_criteria:
         $ref: '#/definitions/service.SearchCriteria'
     type: object

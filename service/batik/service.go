@@ -35,6 +35,10 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 	var results []entity.UnifiedFlight
 	for _, f := range resp.Results {
 
+		if f.Origin != c.Origin || f.Destination != c.Destination {
+			continue
+		}
+
 		layout := "2006-01-02T15:04:05-0700"
 
 		locDep := helpers.GetTimezone(f.DepartureDateTime)
@@ -48,13 +52,16 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 		}
 		durationMins := int(arrTime.Sub(depTime).Minutes())
 
+		originCity := helpers.GetCityName(f.Origin)
+		destinationCity := helpers.GetCityName(f.Destination)
+
 		results = append(results, entity.UnifiedFlight{
 			ID:             fmt.Sprintf("%s_Batik", f.FlightNumber),
 			Provider:       p.Name(),
 			Airline:        entity.AirlineInfo{Name: f.AirlineName, Code: "ID"},
 			FlightNumber:   f.FlightNumber,
-			Departure:      entity.LocationInfo{Airport: f.Origin, City: "Jakarta", DateTime: depTime.Format(time.RFC3339), Timestamp: depTime.Unix()},
-			Arrival:        entity.LocationInfo{Airport: f.Destination, City: "Denpasar", DateTime: arrTime.Format(time.RFC3339), Timestamp: arrTime.Unix()},
+			Departure:      entity.LocationInfo{Airport: f.Origin, City: originCity, DateTime: depTime.Format(time.RFC3339), Timestamp: depTime.Unix()},
+			Arrival:        entity.LocationInfo{Airport: f.Destination, City: destinationCity, DateTime: arrTime.Format(time.RFC3339), Timestamp: arrTime.Unix()},
 			Duration:       entity.DurationInfo{TotalMinutes: durationMins, Formatted: fmt.Sprintf("%dh %dm", durationMins/60, durationMins%60)},
 			Price:          entity.PriceInfo{Amount: f.Fare.TotalPrice, Currency: "IDR"},
 			AvailableSeats: f.SeatsAvailable,

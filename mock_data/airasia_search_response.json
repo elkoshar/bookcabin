@@ -62,6 +62,76 @@
       "seats": 88,
       "cabin_class": "economy",
       "baggage_note": "Cabin baggage only, checked bags additional fee"
+    },
+    {
+      "flight_code": "QZ7760",
+      "airline": "AirAsia",
+      "from_airport": "CGK",
+      "to_airport": "SUB",
+      "depart_time": "2025-12-15T08:00:00+07:00",
+      "arrive_time": "2025-12-15T09:20:00+07:00",
+      "duration_hours": 1.33,
+      "direct_flight": true,
+      "price_idr": 920000,
+      "seats": 120,
+      "cabin_class": "economy",
+      "baggage_note": "Cabin baggage only"
+    },
+    {
+      "flight_code": "QZ7510",
+      "airline": "AirAsia",
+      "from_airport": "CGK",
+      "to_airport": "DPS",
+      "depart_time": "2025-12-16T10:00:00+07:00",
+      "arrive_time": "2025-12-16T12:50:00+08:00",
+      "duration_hours": 1.83,
+      "direct_flight": true,
+      "price_idr": 750000,
+      "seats": 90,
+      "cabin_class": "economy",
+      "baggage_note": "Cabin baggage only"
+    },
+    {
+      "flight_code": "QZ7520",
+      "airline": "AirAsia",
+      "from_airport": "CGK",
+      "to_airport": "DPS",
+      "depart_time": "2025-12-20T14:00:00+07:00",
+      "arrive_time": "2025-12-20T16:50:00+08:00",
+      "duration_hours": 1.83,
+      "direct_flight": true,
+      "price_idr": 850000,
+      "seats": 85,
+      "cabin_class": "economy",
+      "baggage_note": "Cabin baggage only"
+    },
+    {
+      "flight_code": "QZ7771",
+      "airline": "AirAsia",
+      "from_airport": "SUB",
+      "to_airport": "CGK",
+      "depart_time": "2025-12-15T18:00:00+07:00",
+      "arrive_time": "2025-12-15T19:25:00+07:00",
+      "duration_hours": 1.42,
+      "direct_flight": true,
+      "price_idr": 880000,
+      "seats": 110,
+      "cabin_class": "economy",
+      "baggage_note": "Cabin baggage only"
+    },
+    {
+      "flight_code": "QZ7541",
+      "airline": "AirAsia",
+      "from_airport": "DPS",
+      "to_airport": "CGK",
+      "depart_time": "2025-12-17T09:00:00+08:00",
+      "arrive_time": "2025-12-17T09:55:00+07:00",
+      "duration_hours": 1.92,
+      "direct_flight": true,
+      "price_idr": 710000,
+      "seats": 95,
+      "cabin_class": "economy",
+      "baggage_note": "Cabin baggage only"
     }
   ]
 }

@@ -12,5 +12,5 @@ type FlightProvider interface {
 }
 
 type FlightAggregator interface {
-	Search(ctx context.Context, criteria service.SearchCriteria) (service.SearchResponse, error)
+	SearchAll(ctx context.Context, criteria service.SearchCriteria) (service.SearchResponse, error)
 }

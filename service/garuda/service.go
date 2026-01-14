@@ -34,6 +34,11 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 
 	var results []entity.UnifiedFlight
 	for _, f := range resp.Flights {
+
+		if f.Departure.Airport != c.Origin || f.Arrival.Airport != c.Destination {
+			continue
+		}
+
 		locDep := helpers.GetTimezone(f.Departure.Time)
 		locArr := helpers.GetTimezone(f.Arrival.Time)
 

@@ -49,9 +49,10 @@ type PriceInfo struct {
 }
 
 type SearchResponse struct {
-	Criteria SearchCriteria  `json:"search_criteria"`
-	Metadata Metadata        `json:"metadata"`
-	Flights  []UnifiedFlight `json:"flights"`
+	Criteria      SearchCriteria  `json:"search_criteria"`
+	Metadata      Metadata        `json:"metadata"`
+	Flights       []UnifiedFlight `json:"flights"`
+	ReturnFlights []UnifiedFlight `json:"return_flights"`
 }
 
 type Metadata struct {

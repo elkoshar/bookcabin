@@ -7,8 +7,8 @@ type response struct {
 type flight struct {
 	FlightCode   string  `json:"flight_code"`
 	Airline      string  `json:"airline"`
-	From         string  `json:"from_airport"`
-	To           string  `json:"to_airport"`
+	FromAirport  string  `json:"from_airport"`
+	ToAirport    string  `json:"to_airport"`
 	DepartTime   string  `json:"depart_time"`
 	ArriveTime   string  `json:"arrive_time"`
 	PriceIDR     float64 `json:"price_idr"`

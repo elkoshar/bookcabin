@@ -82,6 +82,131 @@
       "onboardServices": [
         "Snack"
       ]
+    },
+    {
+      "flightNumber": "ID6870",
+      "airlineName": "Batik Air",
+      "airlineIATA": "ID",
+      "origin": "CGK",
+      "destination": "SUB",
+      "departureDateTime": "2025-12-15T09:00:00+0700",
+      "arrivalDateTime": "2025-12-15T10:30:00+0700",
+      "travelTime": "1h 30m",
+      "numberOfStops": 0,
+      "fare": {
+        "basePrice": 950000,
+        "taxes": 100000,
+        "totalPrice": 1050000,
+        "currencyCode": "IDR",
+        "class": "Y"
+      },
+      "seatsAvailable": 35,
+      "aircraftModel": "Airbus A320",
+      "baggageInfo": "7kg cabin, 20kg checked",
+      "onboardServices": [
+        "Snack",
+        "Beverage"
+      ]
+    },
+    {
+      "flightNumber": "ID6508",
+      "airlineName": "Batik Air",
+      "airlineIATA": "ID",
+      "origin": "CGK",
+      "destination": "DPS",
+      "departureDateTime": "2025-12-16T11:00:00+0700",
+      "arrivalDateTime": "2025-12-16T13:55:00+0800",
+      "travelTime": "1h 55m",
+      "numberOfStops": 0,
+      "fare": {
+        "basePrice": 1200000,
+        "taxes": 150000,
+        "totalPrice": 1350000,
+        "currencyCode": "IDR",
+        "class": "Y"
+      },
+      "seatsAvailable": 20,
+      "aircraftModel": "Boeing 737-800",
+      "baggageInfo": "7kg cabin, 20kg checked",
+      "onboardServices": [
+        "Meal",
+        "Entertainment"
+      ]
+    },
+    {
+      "flightNumber": "ID6518",
+      "airlineName": "Batik Air",
+      "airlineIATA": "ID",
+      "origin": "CGK",
+      "destination": "DPS",
+      "departureDateTime": "2025-12-20T13:00:00+0700",
+      "arrivalDateTime": "2025-12-20T15:55:00+0800",
+      "travelTime": "1h 55m",
+      "numberOfStops": 0,
+      "fare": {
+        "basePrice": 1300000,
+        "taxes": 150000,
+        "totalPrice": 1450000,
+        "currencyCode": "IDR",
+        "class": "Y"
+      },
+      "seatsAvailable": 25,
+      "aircraftModel": "Airbus A320",
+      "baggageInfo": "7kg cabin, 20kg checked",
+      "onboardServices": [
+        "Meal",
+        "Entertainment"
+      ]
+    },
+    {
+      "flightNumber": "ID6873",
+      "airlineName": "Batik Air",
+      "airlineIATA": "ID",
+      "origin": "SUB",
+      "destination": "CGK",
+      "departureDateTime": "2025-12-15T21:00:00+0700",
+      "arrivalDateTime": "2025-12-15T22:30:00+0700",
+      "travelTime": "1h 30m",
+      "numberOfStops": 0,
+      "fare": {
+        "basePrice": 900000,
+        "taxes": 100000,
+        "totalPrice": 1000000,
+        "currencyCode": "IDR",
+        "class": "Y"
+      },
+      "seatsAvailable": 40,
+      "aircraftModel": "Boeing 737-800",
+      "baggageInfo": "7kg cabin, 20kg checked",
+      "onboardServices": [
+        "Snack",
+        "Beverage"
+      ]
+    },
+    {
+      "flightNumber": "ID6529",
+      "airlineName": "Batik Air",
+      "airlineIATA": "ID",
+      "origin": "DPS",
+      "destination": "CGK",
+      "departureDateTime": "2025-12-17T12:00:00+0800",
+      "arrivalDateTime": "2025-12-17T12:55:00+0700",
+      "travelTime": "1h 55m",
+      "numberOfStops": 0,
+      "fare": {
+        "basePrice": 1100000,
+        "taxes": 120000,
+        "totalPrice": 1220000,
+        "currencyCode": "IDR",
+        "class": "Y"
+      },
+      "seatsAvailable": 30,
+      "aircraftModel": "Airbus A320",
+      "baggageInfo": "7kg cabin, 20kg checked",
+      "onboardServices": [
+        "Meal",
+        "Beverage"
+      ]
     }
   ]
 }

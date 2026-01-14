@@ -134,6 +134,216 @@
             "hold": "20 kg"
           }
         }
+      },
+      {
+        "id": "JT690",
+        "carrier": {
+          "name": "Lion Air",
+          "iata": "JT"
+        },
+        "route": {
+          "from": {
+            "code": "CGK",
+            "name": "Soekarno-Hatta",
+            "city": "Jakarta"
+          },
+          "to": {
+            "code": "SUB",
+            "name": "Juanda",
+            "city": "Surabaya"
+          }
+        },
+        "schedule": {
+          "departure": "2025-12-15T06:00:00",
+          "departure_timezone": "Asia/Jakarta",
+          "arrival": "2025-12-15T07:30:00",
+          "arrival_timezone": "Asia/Jakarta"
+        },
+        "flight_time": 90,
+        "is_direct": true,
+        "pricing": {
+          "total": 850000,
+          "currency": "IDR",
+          "fare_type": "ECONOMY"
+        },
+        "seats_left": 60,
+        "plane_type": "Boeing 737-900ER",
+        "services": {
+          "wifi_available": false,
+          "meals_included": false,
+          "baggage_allowance": {
+            "cabin": "7 kg",
+            "hold": "20 kg"
+          }
+        }
+      },
+      {
+        "id": "JT750",
+        "carrier": {
+          "name": "Lion Air",
+          "iata": "JT"
+        },
+        "route": {
+          "from": {
+            "code": "CGK",
+            "name": "Soekarno-Hatta",
+            "city": "Jakarta"
+          },
+          "to": {
+            "code": "DPS",
+            "name": "Ngurah Rai",
+            "city": "Denpasar"
+          }
+        },
+        "schedule": {
+          "departure": "2025-12-16T08:00:00",
+          "departure_timezone": "Asia/Jakarta",
+          "arrival": "2025-12-16T10:55:00",
+          "arrival_timezone": "Asia/Makassar"
+        },
+        "flight_time": 115,
+        "is_direct": true,
+        "pricing": {
+          "total": 980000,
+          "currency": "IDR",
+          "fare_type": "ECONOMY"
+        },
+        "seats_left": 40,
+        "plane_type": "Boeing 737-800NG",
+        "services": {
+          "wifi_available": false,
+          "meals_included": false,
+          "baggage_allowance": {
+            "cabin": "7 kg",
+            "hold": "20 kg"
+          }
+        }
+      },
+      {
+        "id": "JT756",
+        "carrier": {
+          "name": "Lion Air",
+          "iata": "JT"
+        },
+        "route": {
+          "from": {
+            "code": "CGK",
+            "name": "Soekarno-Hatta",
+            "city": "Jakarta"
+          },
+          "to": {
+            "code": "DPS",
+            "name": "Ngurah Rai",
+            "city": "Denpasar"
+          }
+        },
+        "schedule": {
+          "departure": "2025-12-20T11:00:00",
+          "departure_timezone": "Asia/Jakarta",
+          "arrival": "2025-12-20T13:55:00",
+          "arrival_timezone": "Asia/Makassar"
+        },
+        "flight_time": 115,
+        "is_direct": true,
+        "pricing": {
+          "total": 1100000,
+          "currency": "IDR",
+          "fare_type": "ECONOMY"
+        },
+        "seats_left": 30,
+        "plane_type": "Boeing 737-900ER",
+        "services": {
+          "wifi_available": false,
+          "meals_included": false,
+          "baggage_allowance": {
+            "cabin": "7 kg",
+            "hold": "20 kg"
+          }
+        }
+      },
+      {
+        "id": "JT699",
+        "carrier": {
+          "name": "Lion Air",
+          "iata": "JT"
+        },
+        "route": {
+          "from": {
+            "code": "SUB",
+            "name": "Juanda",
+            "city": "Surabaya"
+          },
+          "to": {
+            "code": "CGK",
+            "name": "Soekarno-Hatta",
+            "city": "Jakarta"
+          }
+        },
+        "schedule": {
+          "departure": "2025-12-15T20:00:00",
+          "departure_timezone": "Asia/Jakarta",
+          "arrival": "2025-12-15T21:30:00",
+          "arrival_timezone": "Asia/Jakarta"
+        },
+        "flight_time": 90,
+        "is_direct": true,
+        "pricing": {
+          "total": 820000,
+          "currency": "IDR",
+          "fare_type": "ECONOMY"
+        },
+        "seats_left": 55,
+        "plane_type": "Boeing 737-800NG",
+        "services": {
+          "wifi_available": false,
+          "meals_included": false,
+          "baggage_allowance": {
+            "cabin": "7 kg",
+            "hold": "20 kg"
+          }
+        }
+      },
+      {
+        "id": "JT761",
+        "carrier": {
+          "name": "Lion Air",
+          "iata": "JT"
+        },
+        "route": {
+          "from": {
+            "code": "DPS",
+            "name": "Ngurah Rai",
+            "city": "Denpasar"
+          },
+          "to": {
+            "code": "CGK",
+            "name": "Soekarno-Hatta",
+            "city": "Jakarta"
+          }
+        },
+        "schedule": {
+          "departure": "2025-12-17T10:00:00",
+          "departure_timezone": "Asia/Makassar",
+          "arrival": "2025-12-17T10:55:00",
+          "arrival_timezone": "Asia/Jakarta"
+        },
+        "flight_time": 115,
+        "is_direct": true,
+        "pricing": {
+          "total": 920000,
+          "currency": "IDR",
+          "fare_type": "ECONOMY"
+        },
+        "seats_left": 45,
+        "plane_type": "Boeing 737-900ER",
+        "services": {
+          "wifi_available": false,
+          "meals_included": false,
+          "baggage_allowance": {
+            "cabin": "7 kg",
+            "hold": "20 kg"
+          }
+        }
       }
     ]
   }
