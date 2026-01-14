@@ -168,6 +168,9 @@
                 },
                 "currency": {
                     "type": "string"
+                },
+                "formatted": {
+                    "type": "string"
                 }
             }
         },
@@ -188,6 +191,9 @@
                 },
                 "passengers": {
                     "type": "integer"
+                },
+                "returnDate": {
+                    "type": "string"
                 }
             }
         },

@@ -2,6 +2,7 @@ package config
 
 import (
 	"log/slog"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
@@ -82,13 +83,14 @@ func Get() *Config {
 func setDefault() {
 	viper.SetDefault("SERVER_PORT", "8080")
 	viper.SetDefault("ENV", "development")
-	viper.SetDefault("GLOBAL_TIMEOUT", 5)
+	viper.SetDefault("GLOBAL_TIMEOUT", 5*time.Second)
+	viper.SetDefault("HTTP_INBOUND_TIMEOUT", 60*time.Second)
 
 	viper.SetDefault("GARUDA_PATH", "")
 	viper.SetDefault("LION_PATH", "")
 	viper.SetDefault("AIRASIA_PATH", "")
 	viper.SetDefault("BATIK_PATH", "")
-	viper.SetDefault("AGGREGATOR_TIMEOUT", 5)
+	viper.SetDefault("AGGREGATOR_TIMEOUT", 5*time.Second)
 }
 
 func (c *Config) postprocess() error {

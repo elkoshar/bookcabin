@@ -4,6 +4,7 @@ type SearchCriteria struct {
 	Origin        string
 	Destination   string
 	DepartureDate string
+	ReturnDate    string
 	Passengers    int
 	CabinClass    string
 }
@@ -42,8 +43,9 @@ type DurationInfo struct {
 }
 
 type PriceInfo struct {
-	Amount   float64 `json:"amount"`
-	Currency string  `json:"currency"`
+	Amount    float64 `json:"amount"`
+	Currency  string  `json:"currency"`
+	Formatted string  `json:"formatted,omitempty"`
 }
 
 type SearchResponse struct {

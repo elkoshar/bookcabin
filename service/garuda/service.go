@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/elkoshar/bookcabin/pkg/helpers"
 	entity "github.com/elkoshar/bookcabin/service"
 )
 
@@ -33,8 +34,15 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 
 	var results []entity.UnifiedFlight
 	for _, f := range resp.Flights {
-		depTime, _ := time.Parse(time.RFC3339, f.Departure.Time)
-		arrTime, _ := time.Parse(time.RFC3339, f.Arrival.Time)
+		locDep := helpers.GetTimezone(f.Departure.Time)
+		locArr := helpers.GetTimezone(f.Arrival.Time)
+
+		depTime, _ := time.ParseInLocation(time.RFC3339, f.Departure.Time, locDep)
+		arrTime, _ := time.ParseInLocation(time.RFC3339, f.Arrival.Time, locArr)
+
+		if depTime.Format("2006-01-02") != c.DepartureDate {
+			continue
+		}
 		durationMins := int(arrTime.Sub(depTime).Minutes())
 
 		results = append(results, entity.UnifiedFlight{

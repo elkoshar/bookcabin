@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/elkoshar/bookcabin/pkg/helpers"
 	entity "github.com/elkoshar/bookcabin/service"
 )
 
@@ -33,21 +34,17 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 
 	var results []entity.UnifiedFlight
 
-	// Load Timezone Locations
-	locJakarta, _ := time.LoadLocation("Asia/Jakarta")
-	if locJakarta == nil {
-		locJakarta = time.FixedZone("WIB", 7*3600)
-	}
-
-	locMakassar, _ := time.LoadLocation("Asia/Makassar")
-	if locMakassar == nil {
-		locMakassar = time.FixedZone("WITA", 8*3600)
-	}
-
 	for _, f := range resp.Data.Flights {
-		// Parsing with explicit location
-		tDep, _ := time.ParseInLocation("2006-01-02T15:04:05", f.Schedule.Departure, locJakarta)
-		tArr, _ := time.ParseInLocation("2006-01-02T15:04:05", f.Schedule.Arrival, locMakassar)
+		locDep := helpers.GetTimezone(f.Schedule.Departure)
+		locArr := helpers.GetTimezone(f.Schedule.Arrival)
+
+		tDep, _ := time.ParseInLocation("2006-01-02T15:04:05", f.Schedule.Departure, locDep)
+		tArr, _ := time.ParseInLocation("2006-01-02T15:04:05", f.Schedule.Arrival, locArr)
+
+		if tDep.Format("2006-01-02") != c.DepartureDate {
+			continue
+		}
+
 		dur := int(tArr.Sub(tDep).Minutes())
 
 		results = append(results, entity.UnifiedFlight{

@@ -61,6 +61,6 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Data = result
-	resp.Code = http.StatusCreated
+	resp.Code = http.StatusOK
 
 }

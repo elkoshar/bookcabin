@@ -67,6 +67,8 @@ definitions:
         type: number
       currency:
         type: string
+      formatted:
+        type: string
     type: object
   service.SearchCriteria:
     properties:
@@ -80,6 +82,8 @@ definitions:
         type: string
       passengers:
         type: integer
+      returnDate:
+        type: string
     type: object
   service.SearchResponse:
     properties:

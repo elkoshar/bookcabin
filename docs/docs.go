@@ -175,6 +175,9 @@ const docTemplate = `{
                 },
                 "currency": {
                     "type": "string"
+                },
+                "formatted": {
+                    "type": "string"
                 }
             }
         },
@@ -195,6 +198,9 @@ const docTemplate = `{
                 },
                 "passengers": {
                     "type": "integer"
+                },
+                "returnDate": {
+                    "type": "string"
                 }
             }
         },

@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/elkoshar/bookcabin/pkg/helpers"
 	entity "github.com/elkoshar/bookcabin/service"
 )
 
@@ -21,7 +22,6 @@ func New(path string) *Provider {
 func (p *Provider) Name() string { return "AirAsia" }
 
 func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entity.UnifiedFlight, error) {
-	fmt.Printf("❌ p.dataPath %s \n", p.dataPath)
 
 	content, err := os.ReadFile(p.dataPath)
 	if err != nil {
@@ -35,8 +35,17 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 
 	var results []entity.UnifiedFlight
 	for _, f := range resp.Flights {
-		depTime, _ := time.Parse(time.RFC3339, f.DepartTime)
-		arrTime, _ := time.Parse(time.RFC3339, f.ArriveTime)
+
+		locDep := helpers.GetTimezone(f.DepartTime)
+		locArr := helpers.GetTimezone(f.ArriveTime)
+
+		depTime, _ := time.ParseInLocation(time.RFC3339, f.DepartTime, locDep)
+		arrTime, _ := time.ParseInLocation(time.RFC3339, f.ArriveTime, locArr)
+
+		if depTime.Format("2006-01-02") != c.DepartureDate {
+			continue
+		}
+
 		durationMins := int(arrTime.Sub(depTime).Minutes())
 
 		stops := 0
