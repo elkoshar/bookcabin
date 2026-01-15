@@ -289,9 +289,6 @@
                 "provider": {
                     "type": "string"
                 },
-                "score": {
-                    "type": "number"
-                },
                 "stops": {
                     "type": "integer"
                 }

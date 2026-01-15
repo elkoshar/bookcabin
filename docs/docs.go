@@ -296,9 +296,6 @@ const docTemplate = `{
                 "provider": {
                     "type": "string"
                 },
-                "score": {
-                    "type": "number"
-                },
                 "stops": {
                     "type": "integer"
                 }

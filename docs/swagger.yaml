@@ -146,8 +146,6 @@ definitions:
         $ref: '#/definitions/service.PriceInfo'
       provider:
         type: string
-      score:
-        type: number
       stops:
         type: integer
     type: object
