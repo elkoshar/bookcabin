@@ -22,7 +22,7 @@ type UnifiedFlight struct {
 	AvailableSeats int          `json:"available_seats"`
 	CabinClass     string       `json:"cabin_class"`
 	Amenities      []string     `json:"amenities"`
-	Score          float64      `json:"-"`
+	Score          float64      `json:"score"`
 }
 
 type AirlineInfo struct {

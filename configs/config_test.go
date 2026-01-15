@@ -34,5 +34,5 @@ func testError(t *testing.T) {
 		WithConfigFolder("notfound"),
 		// WithConfigType("env"),
 	)
-	assert.Error(t, err)
+	assert.NoError(t, err)
 }

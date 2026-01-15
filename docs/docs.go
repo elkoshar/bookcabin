@@ -266,6 +266,9 @@ const docTemplate = `{
                 "provider": {
                     "type": "string"
                 },
+                "score": {
+                    "type": "number"
+                },
                 "stops": {
                     "type": "integer"
                 }
@@ -284,8 +287,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "This service is to handle Flight Search and Aggregation API. For more detail, please visit https://github.com/elkoshar/bookcabin",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {
