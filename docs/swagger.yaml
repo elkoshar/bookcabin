@@ -70,6 +70,15 @@ definitions:
       formatted:
         type: string
     type: object
+  service.RouteSegment:
+    properties:
+      departureDate:
+        type: string
+      destination:
+        type: string
+      origin:
+        type: string
+    type: object
   service.SearchCriteria:
     properties:
       cabinClass:
@@ -84,6 +93,11 @@ definitions:
         type: integer
       returnDate:
         type: string
+      segments:
+        description: for multi-city searches
+        items:
+          $ref: '#/definitions/service.RouteSegment'
+        type: array
     type: object
   service.SearchResponse:
     properties:
@@ -93,6 +107,12 @@ definitions:
         type: array
       metadata:
         $ref: '#/definitions/service.Metadata'
+      multi_city_flights:
+        items:
+          items:
+            $ref: '#/definitions/service.UnifiedFlight'
+          type: array
+        type: array
       return_flights:
         items:
           $ref: '#/definitions/service.UnifiedFlight'

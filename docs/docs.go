@@ -181,6 +181,20 @@ const docTemplate = `{
                 }
             }
         },
+        "service.RouteSegment": {
+            "type": "object",
+            "properties": {
+                "departureDate": {
+                    "type": "string"
+                },
+                "destination": {
+                    "type": "string"
+                },
+                "origin": {
+                    "type": "string"
+                }
+            }
+        },
         "service.SearchCriteria": {
             "type": "object",
             "properties": {
@@ -201,6 +215,13 @@ const docTemplate = `{
                 },
                 "returnDate": {
                     "type": "string"
+                },
+                "segments": {
+                    "description": "for multi-city searches",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/service.RouteSegment"
+                    }
                 }
             }
         },
@@ -215,6 +236,15 @@ const docTemplate = `{
                 },
                 "metadata": {
                     "$ref": "#/definitions/service.Metadata"
+                },
+                "multi_city_flights": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/service.UnifiedFlight"
+                        }
+                    }
                 },
                 "return_flights": {
                     "type": "array",
@@ -287,6 +317,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "This service is to handle Flight Search and Aggregation API. For more detail, please visit https://github.com/elkoshar/bookcabin",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {

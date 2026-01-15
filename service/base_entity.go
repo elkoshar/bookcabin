@@ -7,6 +7,13 @@ type SearchCriteria struct {
 	ReturnDate    string
 	Passengers    int
 	CabinClass    string
+	Segments      []RouteSegment //for multi-city searches
+}
+
+type RouteSegment struct {
+	Origin        string
+	Destination   string
+	DepartureDate string
 }
 
 type UnifiedFlight struct {
@@ -22,7 +29,7 @@ type UnifiedFlight struct {
 	AvailableSeats int          `json:"available_seats"`
 	CabinClass     string       `json:"cabin_class"`
 	Amenities      []string     `json:"amenities"`
-	Score          float64      `json:"score"`
+	Score          float64      `json:"-"`
 }
 
 type AirlineInfo struct {
@@ -49,10 +56,11 @@ type PriceInfo struct {
 }
 
 type SearchResponse struct {
-	Criteria      SearchCriteria  `json:"search_criteria"`
-	Metadata      Metadata        `json:"metadata"`
-	Flights       []UnifiedFlight `json:"flights"`
-	ReturnFlights []UnifiedFlight `json:"return_flights"`
+	Criteria         SearchCriteria    `json:"search_criteria"`
+	Metadata         Metadata          `json:"metadata"`
+	Flights          []UnifiedFlight   `json:"flights"`
+	ReturnFlights    []UnifiedFlight   `json:"return_flights"`
+	MultiCityFlights [][]UnifiedFlight `json:"multi_city_flights,omitempty"`
 }
 
 type Metadata struct {

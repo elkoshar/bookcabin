@@ -28,6 +28,11 @@ func NewAggregator(timeout time.Duration, providers ...api.FlightProvider) *Flig
 }
 
 func (s *FlightAggregator) SearchAll(ctx context.Context, criteria service.SearchCriteria) (service.SearchResponse, error) {
+
+	if len(criteria.Segments) > 0 {
+		return s.searchMultiCity(ctx, criteria)
+	}
+
 	startTime := time.Now()
 
 	if criteria.Origin == criteria.Destination {
@@ -179,4 +184,48 @@ func (s *FlightAggregator) executeSearch(ctx context.Context, criteria service.S
 	}
 
 	return allFlights, meta, nil
+}
+
+func (s *FlightAggregator) searchMultiCity(ctx context.Context, criteria service.SearchCriteria) (service.SearchResponse, error) {
+	startTime := time.Now()
+	var multiResults [][]service.UnifiedFlight
+
+	totalSucceeded := 0
+	totalFailed := 0
+	totalResults := 0
+
+	for i, seg := range criteria.Segments {
+		slog.Info(fmt.Sprintf("[Aggregator] Multi-City Seg %d: %s -> %s on %s", i+1, seg.Origin, seg.Destination, seg.DepartureDate))
+
+		segCriteria := criteria
+		segCriteria.Origin = seg.Origin
+		segCriteria.Destination = seg.Destination
+		segCriteria.DepartureDate = seg.DepartureDate
+
+		flights, meta, err := s.executeSearch(ctx, segCriteria)
+		if err != nil {
+			slog.Error(fmt.Sprintf("Segment %d failed: %v", i+1, err))
+			multiResults = append(multiResults, []service.UnifiedFlight{})
+			continue
+		}
+
+		multiResults = append(multiResults, flights)
+		totalSucceeded += meta.ProvidersSucceeded
+		totalFailed += meta.ProvidersFailed
+		totalResults += len(flights)
+	}
+
+	finalMeta := service.Metadata{
+		TotalResults:       totalResults,
+		ProvidersQueried:   len(s.providers) * len(criteria.Segments),
+		ProvidersSucceeded: totalSucceeded,
+		ProvidersFailed:    totalFailed,
+		SearchTimeMs:       time.Since(startTime).Milliseconds(),
+	}
+
+	return service.SearchResponse{
+		Criteria:         criteria,
+		Metadata:         finalMeta,
+		MultiCityFlights: multiResults,
+	}, nil
 }

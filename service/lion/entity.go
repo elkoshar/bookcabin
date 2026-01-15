@@ -38,5 +38,7 @@ type schedule struct {
 }
 
 type pricing struct {
-	Total float64 `json:"total"`
+	Total    float64 `json:"total"`
+	Currency string  `json:"currency"`
+	FareType string  `json:"fare_type"`
 }

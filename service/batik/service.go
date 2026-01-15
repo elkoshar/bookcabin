@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/elkoshar/bookcabin/pkg/helpers"
@@ -38,7 +39,19 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 		if f.Origin != c.Origin || f.Destination != c.Destination {
 			continue
 		}
+		targetClass := "Y" // Default Economy
+		switch strings.ToLower(c.CabinClass) {
+		case "business":
+			targetClass = "C"
+		case "first":
+			targetClass = "F"
+		case "economy":
+			targetClass = "Y"
+		}
 
+		if f.Fare.Class != targetClass {
+			continue
+		}
 		layout := "2006-01-02T15:04:05-0700"
 
 		locDep := helpers.GetTimezone(f.DepartureDateTime)

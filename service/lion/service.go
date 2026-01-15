@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/elkoshar/bookcabin/pkg/helpers"
@@ -37,6 +38,10 @@ func (p *Provider) Search(ctx context.Context, c entity.SearchCriteria) ([]entit
 	for _, f := range resp.Data.Flights {
 
 		if f.Route.From.Code != c.Origin || f.Route.To.Code != c.Destination {
+			continue
+		}
+
+		if strings.ToLower(f.Pricing.FareType) != strings.ToLower(c.CabinClass) {
 			continue
 		}
 
